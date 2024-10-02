@@ -1,0 +1,31 @@
+{
+  "name": "frosting",
+  "version": "0.0.1",
+  "description": "A sanity-inducing tool for the Freight.",
+  "main": "eslint.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yomazi/frosting.git"
+  },
+  "author": "Robin Gabrielli (yomazi)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yomazi/frosting/issues"
+  },
+  "homepage": "https://github.com/yomazi/frosting#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "prettier": "^3.3.3",
+    "prettier-plugin-organize-imports": "^4.1.0"
+  }
+}

@@ -1,0 +1,9 @@
+# All node_modules folders
+node_modules
+
+# Ignore SSL certificates and keys
+https/server.key
+https/server.cert
+
+# Client builds
+frosting-client/dist/
