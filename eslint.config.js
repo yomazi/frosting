@@ -1,6 +1,4 @@
 import js from "@eslint/js";
-import typescriptPlugin from "@typescript-eslint/eslint-plugin";
-import typescriptParser from "@typescript-eslint/parser";
 import prettierConfig from "eslint-config-prettier";
 import prettierPlugin from "eslint-plugin-prettier";
 import reactPlugin from "eslint-plugin-react";
@@ -11,20 +9,6 @@ import prettierOrganizeImports from "prettier-plugin-organize-imports";
 export default [
   // Base JavaScript configuration
   js.configs.recommended,
-
-  // TypeScript configuration
-  {
-    files: ["*.ts", "*.tsx"],
-    languageOptions: {
-      parser: typescriptParser,
-    },
-    plugins: {
-      "@typescript-eslint": typescriptPlugin,
-    },
-    rules: {
-      ...typescriptPlugin.configs.recommended.rules,
-    },
-  },
 
   // React configuration
   {

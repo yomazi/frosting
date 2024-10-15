@@ -1,9 +1,15 @@
 # All node_modules folders
 node_modules
 
-# Ignore SSL certificates and keys
+# SSL certificates and keys
 https/server.key
 https/server.cert
 
+# Firebase service account key
+firebase/service-account-key-staging.json
+
+# local env file for server
+node-server/.env.local
+
 # Client builds
-frosting-client/dist/
+web-client/dist/
