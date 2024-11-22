@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Navigate,
   Route,
@@ -10,28 +11,29 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import PerformanceList from "./components/PerformanceList";
 import Register from "./components/Register";
+import { logout } from "./redux/slices/authSlice";
 
 function App() {
-  const token = localStorage.getItem("frostingUserToken");
-  const [isLoggedIn, setIsLoggedIn] = useState(token != null);
+  const { isLoggedIn, isLoading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  console.log(`isLoggedIn: ${isLoggedIn}`);
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>;
+  }
 
   return (
     <>
-      {isLoggedIn && <Navbar setIsLoggedIn={setIsLoggedIn} />}
+      {isLoggedIn && <Navbar onLogout={handleLogout} />}
 
       <Router>
         <Routes>
           <Route
             path="/login"
-            element={
-              !isLoggedIn ? (
-                <Login setIsLoggedIn={setIsLoggedIn} />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
+            element={!isLoggedIn ? <Login /> : <Navigate to="/" />}
           />
           <Route
             path="/register"

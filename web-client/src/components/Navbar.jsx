@@ -2,32 +2,29 @@ import { getAuth, signOut } from "firebase/auth";
 import styles from "../styles/navbar.module.scss";
 import cupcakeLogo from "/cupcake.svg";
 
-const Navbar = ({ setIsLoggedIn }) => {
-  const logout = async () => {
+const Navbar = ({ onLogout }) => {
+  const handleLogout = async () => {
     try {
       const auth = getAuth();
       const response = await signOut(auth);
 
-      localStorage.removeItem("frostingUserToken"); // Clear token
-      setIsLoggedIn(false);
+      onLogout();
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <section id={styles.navbar}>
-      <div>
-        <img src={cupcakeLogo} className="logo" alt="Frosting logo" />
-      </div>
-      <div class={styles.banner}>
+    <section id={styles.navbar} className="flex justify-between">
+      <article className="flex items-center">
+        <div>
+          <img src={cupcakeLogo} className="logo" alt="Frosting logo" />
+        </div>
         <h1>Frosting!</h1>
-        <div>A sanity-inducing tool for the Freight.</div>
-      </div>
-
-      <div>
-        <button onClick={logout}>Logout</button>
-      </div>
+      </article>
+      <article className={styles.buttonContainer}>
+        <button onClick={handleLogout}>Logout</button>
+      </article>
     </section>
   );
 };

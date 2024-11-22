@@ -1,0 +1,18 @@
+input {
+  background-color: #fef;
+  border: 1px solid #ede;
+  transition: all 0.2s;
+
+  &:hover,
+  &:focus {
+    border: 1px solid #a9a;
+  }
+}
+
+.auth-error-message {
+  color: red;
+}
+
+.auth-success-message {
+  color: green;
+}

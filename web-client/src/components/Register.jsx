@@ -1,19 +1,22 @@
 import axios from "axios";
 import { useState } from "react";
+import styles from "../styles/auth.module.scss";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
   const [shouldShowSuccessMessage, setShouldShowSuccessMessage] =
     useState(false);
 
-  const register = async () => {
+  const handleRegister = async () => {
     try {
-      console.log(`sending: ${email} ${password}`);
-      const response = await axios.post("/api/register", {
-        email,
-        password,
-      });
+      const response = await axios.post("/api/register", formData);
+
       console.log(response);
       setShouldShowSuccessMessage(true);
     } catch (error) {
@@ -21,28 +24,42 @@ const Register = () => {
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setShouldShowSuccessMessage(false);
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
-    <section>
-      <h2>Register a New user</h2>
-      <a href="/login">Login as an existing user instead</a>
-      <article>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button onClick={register}>Register</button>
+    <section id="auth" className="flex flex-col items-center mt-8">
+      <h1 className="mb-8">Register a New User</h1>
+      <article className="flex flex-col">
+        {[
+          { name: "firstName", placeholder: "First Name", type: "text" },
+          { name: "lastName", placeholder: "Last Name", type: "text" },
+          { name: "email", placeholder: "Email", type: "email" },
+          { name: "password", placeholder: "Password", type: "password" },
+        ].map((field) => (
+          <input
+            key={field.name}
+            name={field.name}
+            value={formData[field.name]}
+            onChange={handleChange}
+            placeholder={field.placeholder}
+            type={field.type}
+            className="p-2 rounded-md focus:outline-none mb-4"
+          />
+        ))}
+        <button onClick={handleRegister}>Register</button>
       </article>
-      {shouldShowSuccessMessage && (
-        <div style={{ color: "green" }}>User created successfully.</div>
-      )}
+      <article
+        className={`${styles.authSuccessMessage} flex items-center h-16`}
+      >
+        {shouldShowSuccessMessage ? "User created successfully" : ""}
+      </article>
+      <div>
+        <a href="/login">Login as an existing user instead</a>
+      </div>
     </section>
   );
 };

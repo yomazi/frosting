@@ -60,10 +60,10 @@ const scrapeTheFreight = async (req, res) => {
 
     console.log(performances);
     // Send the analyzed data as a JSON response
-    res.json(performances);
+    return res.status(200).json(performances);
   } catch (error) {
     console.error("Error scraping thefreight.org:", error);
-    res.status(500).json({
+    return res.status(500).json({
       error: `Failed to fetch and analyze thefreight.org: ${error.message}`,
     });
   }

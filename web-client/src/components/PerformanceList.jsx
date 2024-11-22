@@ -1,27 +1,24 @@
-import { useEffect, useState } from "react";
-import scrapeTheFreight from "../services/web-scraper";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPerformances } from "../redux/slices/performanceSlice";
+import styles from "../styles/performance-list.module.scss";
 
 const PerformanceList = ({ setIsLoggedIn }) => {
-  const [performances, setPerformances] = useState([]);
+  const dispatch = useDispatch();
+  const { performances, isLoading, error } = useSelector(
+    (state) => state.performances,
+  );
 
   useEffect(() => {
-    const scrape = async () => {
-      const newPerformanceList = await scrapeTheFreight();
-
-      if (JSON.stringify(newPerformanceList) !== JSON.stringify(performances)) {
-        setPerformances(newPerformanceList);
-      }
-    };
-
-    scrape();
-  }, []);
+    dispatch(fetchPerformances());
+  }, [dispatch]);
 
   return (
-    <main id="performance-list">
+    <main id={styles.performanceList} className="mx-8 my-4">
       <ul>
         {performances.length ? (
           performances.map((item, index) => (
-            <li key={index}>
+            <li className="mb-2" key={index}>
               <a href={item.link} className="title">
                 {item.title}
               </a>

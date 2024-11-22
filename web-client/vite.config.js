@@ -4,6 +4,12 @@ import { defineConfig } from "vite";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  css: {
+    postcss: "./postcss.config.cjs",
+    modules: {
+      localsConvention: "camelCaseOnly",
+    },
+  },
   server: {
     https: {
       key: "../https/server.key",
