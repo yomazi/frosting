@@ -2,6 +2,26 @@ const os = require("os");
 const dotenv = require("dotenv");
 const admin = require("firebase-admin");
 const stagingKey = require("../../../firebase/service-account-key-staging.json");
+const clientConfig = {
+  STAGING: {
+    apiKey: "AIzaSyBTpmkAHrE8hqtLTZoImCHdTK-yqODIFwY",
+    authDomain: "frosting-dev-a5b37.firebaseapp.com",
+    projectId: "frosting-dev-a5b37",
+    storageBucket: "frosting-dev-a5b37.appspot.com",
+    messagingSenderId: "1017468681757",
+    appId: "1:1017468681757:web:54bc6107a6ecf82f8810f4",
+    measurementId: "G-ZZM2C4Y582",
+  },
+  PRODUCTION: {
+    apiKey: "AIzaSyBTpmkAHrE8hqtLTZoImCHdTK-yqODIFwY",
+    authDomain: "frosting-dev-a5b37.firebaseapp.com",
+    projectId: "frosting-dev-a5b37",
+    storageBucket: "frosting-dev-a5b37.appspot.com",
+    messagingSenderId: "1017468681757",
+    appId: "1:1017468681757:web:54bc6107a6ecf82f8810f4",
+    measurementId: "G-ZZM2C4Y582",
+  },
+};
 
 const isLocalEnvironment = () => {
   const hostname = os.hostname();
@@ -46,14 +66,18 @@ const serviceAccountKey = flags.shouldUseProductionDb ? stagingKey : stagingKey;
 const projectId = flags.shouldUseProductionDb
   ? "frosting-dev-a5b37"
   : "frosting-dev-a5b37";
+const firebaseConfig = flags.shouldUseProductionDb
+  ? clientConfig.STAGING
+  : clientConfig.STAGING;
 
-console.log(`*** ${envId} environment, using ${dbId} db ***`);
+console.log(`*** ${envId} environment using ${dbId} db ***`);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccountKey),
   databaseURL: `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents`,
 });
 
+const auth = admin.auth();
 const db = admin.firestore();
 
-module.exports = { admin, db, envId, dbId };
+module.exports = { auth, db, envId, dbId, firebaseConfig };

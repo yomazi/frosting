@@ -3,6 +3,7 @@ const https = require("https");
 const fs = require("fs");
 const path = require("path");
 const app = express();
+const authRoutes = require("./routes/auth-routes.js");
 const environmentRoutes = require("./routes/environment-routes");
 const scraperRoutes = require("./routes/scraper-routes");
 const performanceRoutes = require("./routes/performance-routes");
@@ -13,6 +14,7 @@ app.use(express.static(path.join(__dirname, "../../web-client/dist")));
 // middleware to parse JSON request bodies
 app.use(express.json());
 
+app.use("/api", authRoutes);
 app.use("/api", environmentRoutes);
 app.use("/api", performanceRoutes);
 app.use("/api", scraperRoutes);

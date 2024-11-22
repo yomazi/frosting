@@ -9,6 +9,7 @@ export default defineConfig({
       key: "../https/server.key",
       cert: "../https/server.cert",
     },
+
     proxy: {
       "/api": {
         target: "https://localhost:443", // Your Express server

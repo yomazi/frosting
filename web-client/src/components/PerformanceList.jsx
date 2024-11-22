@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import scrapeTheFreight from "../services/web-scraper-service";
+import scrapeTheFreight from "../services/web-scraper";
 
-const PerformanceList = () => {
+const PerformanceList = ({ setIsLoggedIn }) => {
   const [performances, setPerformances] = useState([]);
 
   useEffect(() => {

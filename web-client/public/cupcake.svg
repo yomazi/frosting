@@ -1,2 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" id="cupcake" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color"><path id="primary" d="M6.08,13l1.07,7.15a1,1,0,0,0,1,.85h7.72a1,1,0,0,0,1-.85L17.92,13Z" style="fill: rgb(139, 69, 19); stroke: rgb(139, 69, 19); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="secondary" d="M6.08,13A3.56,3.56,0,0,1,5,10.5C5,8.28,7.35,7,7.35,7,9.24,9.24,12,9.11,16.44,9.5c2,.19,2.56,1.06,2.56,1.89A1.7,1.7,0,0,1,17.92,13ZM7.35,7C9.24,9.24,12,9.11,16.44,9.5a4.4,4.4,0,0,1,1.61.41C18.58,9.1,19.81,7,15,6c-3.9-.78-5-3-5-3A4,4,0,0,0,7.35,7Z" style="fill: none; stroke: rgb(255, 182, 193); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></svg>
+<svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" id="cupcake" xmlns="http://www.w3.org/2000/svg" class="icon line-color">
+  <!-- Base of the cupcake with detailed creases -->
+  <path id="primary" d="M6.08,13l1.07,7.15a1,1,0,0,0,1,.85h7.72a1,1,0,0,0,1-.85L17.92,13Z" 
+        style="fill: rgb(139, 69, 19); stroke: rgb(55, 10, 1); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;"></path>
+  
+  <!-- Cupcake wrapper details (creases) -->
+  <path d="M7,13 L7.5,20" stroke="rgba(55, 10, 1, 0.8)" stroke-width="0.5"/>
+  <path d="M8.5,13 L9,20" stroke="rgba(55, 10, 1, 0.8)" stroke-width="0.5"/>
+  <path d="M10,13 L10.5,20" stroke="rgba(55, 10, 1, 0.8)" stroke-width="0.5"/>
+  <path d="M11.5,13 L12,20" stroke="rgba(55, 10, 1, 0.8)" stroke-width="0.5"/>
+  <path d="M13,13 L13.5,20" stroke="rgba(55, 10, 1, 0.8)" stroke-width="0.5"/>
+  <path d="M14.5,13 L15,20" stroke="rgba(55, 10, 1, 0.8)" stroke-width="0.5"/>
+  <path d="M16,13 L16.5,20" stroke="rgba(55, 10, 1, 0.8)" stroke-width="0.5"/>
+
+  <!-- Frosting with a wavy pattern -->
+  <path id="secondary" d="M6.08,13A3.56,3.56,0,0,1,5,10.5C5,8.28,7.35,7,7.35,7,9.24,9.24,12,9.11,16.44,9.5c2,.19,2.56,1.06,2.56,1.89A1.7,1.7,0,0,1,17.92,13ZM7.35,7C9.24,9.24,12,9.11,16.44,9.5a4.4,4.4,0,0,1,1.61.41C18.58,9.1,19.81,7,15,6c-3.9-.78-5-3-5-3A4,4,0,0,0,7.35,7Z" 
+        style="fill: rgb(255, 182, 193); stroke: rgb(248, 18, 91); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;"></path>
+
+  <!-- More spread-out multicolored sprinkles -->
+  <circle cx="6" cy="7.5" r="0.6" fill="#ffeb3b" />
+  <circle cx="9" cy="8.5" r="0.6" fill="#4caf50" />
+  <circle cx="12" cy="7" r="0.6" fill="#ff4081" />
+  <circle cx="15" cy="9.5" r="0.6" fill="#2196f3" />
+  <circle cx="17" cy="7" r="0.6" fill="#ffeb3b" />
+  <circle cx="8" cy="6" r="0.6" fill="#4caf50" />
+  <circle cx="13" cy="5.5" r="0.6" fill="#ff4081" />
+  <circle cx="16" cy="6.5" r="0.6" fill="#ffeb3b" />
+  <circle cx="11" cy="10" r="0.6" fill="#2196f3" />
+  <circle cx="7" cy="9.5" r="0.6" fill="#ff4081" />
+  
+  <!-- Additional sprinkles -->
+  <circle cx="14" cy="6.5" r="0.6" fill="#ffeb3b" />
+  <circle cx="10" cy="6" r="0.6" fill="#4caf50" />
+  <circle cx="8" cy="10" r="0.6" fill="#ff4081" />
+  <circle cx="15" cy="8" r="0.6" fill="#2196f3" />
+
+</svg>
