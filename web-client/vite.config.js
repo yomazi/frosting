@@ -18,7 +18,7 @@ export default defineConfig({
 
     proxy: {
       "/api": {
-        target: "https://localhost:443", // Your Express server
+        target: "https://localhost:8080", // Your Express server
         changeOrigin: true,
         secure: false,
       },

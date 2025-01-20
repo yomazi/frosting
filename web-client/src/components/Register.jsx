@@ -1,8 +1,18 @@
 import axios from "axios";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { login } from "../redux/slices/authSlice.js";
+import AuthService from "../services/auth-service";
 import styles from "../styles/auth.module.scss";
+import Spinner from "./Spinner";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const [shouldShowErrorMessage, setShouldShowErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -10,57 +20,96 @@ const Register = () => {
     password: "",
   });
 
-  const [shouldShowSuccessMessage, setShouldShowSuccessMessage] =
-    useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleRegister = async () => {
     try {
-      const response = await axios.post("/api/register", formData);
+      setIsLoading(true);
+      AuthService.shouldVerifyTokens = false;
+
+      const { firstName, lastName, email, password } = formData;
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+      await axios.post(`/api/v1/users`, {
+        firstName,
+        lastName,
+        email,
+        uid: userCredential.user.uid,
+      });
+
+      const idToken = await userCredential.user.getIdToken(true); // Force token refresh
+      const response = await axios.post(`/api/v1/auth/verify`, { token: idToken });
 
       console.log(response);
-      setShouldShowSuccessMessage(true);
+      dispatch(login(response.data));
     } catch (error) {
-      console.error("Login failed:", error.response.data.error);
+      console.error("Create user failed:", error.message);
+
+      const errorMessages = {
+        "auth/invalid-email": "Invalid email format.",
+        "auth/missing-password": "Missing password.",
+        "auth/too-many-requests": "Too many attempts. Please try again later.",
+      };
+
+      setErrorMessage(errorMessages[error.code]);
+      setShouldShowErrorMessage(true);
+    } finally {
+      AuthService.shouldVerifyTokens = true;
+      setIsLoading(false);
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setShouldShowSuccessMessage(false);
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrorMessage("");
+    setShouldShowErrorMessage(false);
   };
 
   return (
-    <section id="auth" className="flex flex-col items-center mt-8">
-      <h1 className="mb-8">Register a New User</h1>
-      <article className="flex flex-col">
-        {[
-          { name: "firstName", placeholder: "First Name", type: "text" },
-          { name: "lastName", placeholder: "Last Name", type: "text" },
-          { name: "email", placeholder: "Email", type: "email" },
-          { name: "password", placeholder: "Password", type: "password" },
-        ].map((field) => (
-          <input
-            key={field.name}
-            name={field.name}
-            value={formData[field.name]}
-            onChange={handleChange}
-            placeholder={field.placeholder}
-            type={field.type}
-            className="p-2 rounded-md focus:outline-none mb-4"
-          />
-        ))}
-        <button onClick={handleRegister}>Register</button>
-      </article>
-      <article
-        className={`${styles.authSuccessMessage} flex items-center h-16`}
-      >
-        {shouldShowSuccessMessage ? "User created successfully" : ""}
-      </article>
-      <div>
-        <a href="/login">Login as an existing user instead</a>
-      </div>
-    </section>
+    <>
+      <section id="auth" className="flex flex-col items-center mt-8 w-full">
+        <h1 className="mb-8">Create an Account!</h1>
+        <form onSubmit={handleSubmit} className="w-full">
+          <article className="flex flex-col items-center w-full">
+            {[
+              { name: "firstName", placeholder: "First Name", type: "text" },
+              { name: "lastName", placeholder: "Last Name", type: "text" },
+              { name: "email", placeholder: "Email", type: "email" },
+              { name: "password", placeholder: "Password", type: "password" },
+            ].map((field) => (
+              <input
+                key={field.name}
+                name={field.name}
+                value={formData[field.name]}
+                onChange={handleChange}
+                placeholder={field.placeholder}
+                type={field.type}
+                className="p-3 rounded-none focus:outline-none mb-4 w-full xs:max-w-lg sm:rounded-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl"
+              />
+            ))}
+            <section className="relative flex flex-col justify-center items-center xs:flex-row xs:px-3 mb-4 w-full xs:max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl">
+              <button type="submit" className="w-48 mb-2" disabled={isLoading}>
+                Register
+              </button>
+              <div className="flex relative right-auto mt-6 h-12 px-4 hover:underline sm:absolute sm:mt-0 sm:right-0">
+                <Link to="/login" className="flex h-full items-center text-purple-500 hover:text-purple-700 ">
+                  Sign In
+                </Link>
+              </div>
+            </section>
+          </article>
+        </form>
+        <article
+          key={errorMessage}
+          className={`${styles.message} ${styles.authErrorMessage} flex items-center h-16`}
+        >
+          {shouldShowErrorMessage && errorMessage}
+        </article>
+      </section>
+      <Spinner openOn={isLoading} />
+    </>
   );
 };
 

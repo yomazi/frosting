@@ -1,18 +1,51 @@
 input {
-  background-color: #fef;
-  border: 1px solid #ede;
-  transition: all 0.2s;
+  background-color: #fff;
+  border: 2px solid #ede;
+  transition: border 0.2s;
 
-  &:hover,
+  &:hover {
+    border: 2px solid #cbc;
+  }
   &:focus {
-    border: 1px solid #a9a;
+    border: 2px solid #989;
+  }
+}
+
+.message {
+  font-size: 1.2rem;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
   }
 }
 
 .auth-error-message {
   color: red;
-}
-
-.auth-success-message {
-  color: green;
+  font-weight: bold;
+  animation:
+    slideIn 0.3s ease-out,
+    shake 0.3s ease-in-out 0.3s;
 }
