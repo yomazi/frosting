@@ -3,6 +3,40 @@
   align-items: center;
 }
 
+.list {
+  display: flex;
+  gap: 1rem;
+}
+
+.list li {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
 .button-container {
   margin-right: 1.5rem;
+}
+
+h1 {
+  color: #f8125b;
+  text-shadow: 2px 2px 4px rgba(248, 18, 91, 0.3);
+}
+
+.logo {
+  height: 6em;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
 }

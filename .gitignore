@@ -1,12 +1,13 @@
 # All node_modules folders
 node_modules
 
-# SSL certificates and keys
-https/server.key
-https/server.cert
-
 # Firebase service account key
-firebase/service-account-key-staging.json
+node-server/firebase/service-account-key-staging.json
+node-server/firebase/service-account-key-production.json
+
+# SSL certificates and keys
+node-server/https/server.key
+node-server/https/server.cert
 
 # local env file for server
 node-server/.env.local

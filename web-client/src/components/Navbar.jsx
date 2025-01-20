@@ -1,4 +1,5 @@
 import { getAuth, signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
 import styles from "../styles/navbar.module.scss";
 import cupcakeLogo from "/cupcake.svg";
 
@@ -18,12 +19,23 @@ const Navbar = ({ onLogout }) => {
     <section id={styles.navbar} className="flex justify-between">
       <article className="flex items-center">
         <div>
-          <img src={cupcakeLogo} className="logo" alt="Frosting logo" />
+          <img src={cupcakeLogo} className={styles.logo} alt="Frosting logo" />
         </div>
         <h1>Frosting!</h1>
       </article>
+      <ul className={styles.list}>
+        <li>
+          <Link to="/show-listing">Show Listing</Link>
+        </li>
+        <li>
+          <Link to="/show-reminders">Show Reminders</Link>
+        </li>
+        <li>Livestream Links</li>
+      </ul>
       <article className={styles.buttonContainer}>
-        <button onClick={handleLogout}>Logout</button>
+        <button className="w-48" onClick={handleLogout}>
+          Logout
+        </button>
       </article>
     </section>
   );
