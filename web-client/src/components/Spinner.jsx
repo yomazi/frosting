@@ -7,7 +7,7 @@ const Spinner = ({ openOn }) => {
     <Backdrop
       sx={{
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        color: "#fff", //"#646cff",
+        color: "#fff",
         zIndex: (theme) => theme.zIndex.drawer + 1,
         position: "absolute",
         transition: "opacity 0.3s ease-in-out",

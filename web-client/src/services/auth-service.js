@@ -2,6 +2,7 @@ import axios from "axios";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 class AuthService {
+  static #unsubscribeAuthListener = null;
   static #shouldVerifyTokens = true;
 
   static get shouldVerifyTokens() {
@@ -12,16 +13,38 @@ class AuthService {
     this.#shouldVerifyTokens = value;
   }
 
+  static async verifyToken(idToken) {
+    try {
+      const response = await axios.post(
+        `/api/v1/auth/verify`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        },
+      );
+
+      return response;
+    } catch (error) {
+      console.error(error.message);
+      return null;
+    }
+  }
+
   static listenToAuthChanges(dispatch, login, logout) {
     const auth = getAuth();
 
-    onAuthStateChanged(auth, async (user) => {
+    if (this.#unsubscribeAuthListener) {
+      console.log("unsubscribing");
+      this.#unsubscribeAuthListener();
+    }
+
+    this.#unsubscribeAuthListener = onAuthStateChanged(auth, async (user) => {
       if (user) {
         if (this.#shouldVerifyTokens) {
-          const token = await user.getIdToken();
-          const response = await axios.post(`/api/v1/auth/verify`, {
-            token,
-          });
+          const idToken = await user.getIdToken();
+          const response = await AuthService.verifyToken(idToken);
           const dbUser = response.data.user;
 
           dispatch(login({ ...dbUser }));

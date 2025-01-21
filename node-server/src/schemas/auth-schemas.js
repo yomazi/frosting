@@ -1,10 +1,9 @@
 const Joi = require("joi");
+const authHeaderSchema = require("./auth-header-schema");
 
 class AuthSchemas {
   static verify = {
-    body: Joi.object({
-      token: Joi.string().required(),
-    }),
+    headers: authHeaderSchema,
   };
 }
 

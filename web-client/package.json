@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "clean": "rm -rf node_modules && npm cache clean --force"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.0",
-    "@mui/material": "^6.4.0",
+    "@mui/icons-material": "^6.4.0",
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
     "firebase": "^10.14.1",

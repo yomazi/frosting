@@ -9,7 +9,7 @@ import PerformanceList from "./components/PerformanceList";
 import Register from "./components/Register";
 import ShowReminderHelper from "./components/robin/ShowReminderHelper";
 import Spinner from "./components/Spinner";
-import { logout } from "./redux/slices/authSlice";
+import { logout } from "./redux/slices/auth-slice";
 
 const ProtectedContent = () => {
   const { isLoggedIn, isLoading } = useSelector((state) => state.auth);

@@ -9,6 +9,7 @@ const {
   DB_KEYS,
   FIREBASE_CONFIG,
   DB_IDS,
+  API_KEYS,
 } = require("./config-service-constants");
 
 const envFile = `.env.${process.env.NODE_ENV}`;
@@ -23,8 +24,8 @@ class ConfigService {
   static #environmentId = environmentId;
   static #useProductionDb = useProductionDb;
   static #dbId = useProductionDb ? DB_IDS.PRODUCTION : DB_IDS.STAGING;
-
   static #firebaseConfig = useProductionDb ? FIREBASE_CONFIG.PRODUCTION : FIREBASE_CONFIG.STAGING;
+  static #apiKey = useProductionDb ? API_KEYS.PRODUCTION : API_KEYS.STAGING;
 
   static get environmentId() {
     return this.#environmentId;
@@ -40,6 +41,10 @@ class ConfigService {
 
   static get firebaseConfig() {
     return this.#firebaseConfig;
+  }
+
+  static get apiKey() {
+    return this.#apiKey;
   }
 
   static enableCors = (app) => {

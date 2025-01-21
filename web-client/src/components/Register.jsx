@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { login } from "../redux/slices/authSlice.js";
+import { login } from "../redux/slices/auth-slice.js";
 import AuthService from "../services/auth-service";
 import styles from "../styles/auth.module.scss";
 import Spinner from "./Spinner";
@@ -39,9 +39,8 @@ const Register = () => {
       });
 
       const idToken = await userCredential.user.getIdToken(true); // Force token refresh
-      const response = await axios.post(`/api/v1/auth/verify`, { token: idToken });
+      const response = await AuthService.verifyToken(idToken);
 
-      console.log(response);
       dispatch(login(response.data));
     } catch (error) {
       console.error("Create user failed:", error.message);
