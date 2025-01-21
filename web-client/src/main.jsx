@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App.jsx";
 import "./index.css";
-import { login, logout } from "./redux/slices/authSlice.js";
+import { login, logout } from "./redux/slices/auth-slice.js";
 import { store } from "./redux/store.js";
 import AuthService from "./services/auth-service.js";
 import { getEnvironmentInfo } from "./services/environment.js";

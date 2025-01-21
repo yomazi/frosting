@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchPerformances } from "../redux/slices/performanceSlice";
+import { fetchPerformances } from "../redux/slices/performance-slice";
 import styles from "../styles/performance-list.module.scss";
 import Spinner from "./Spinner";
 

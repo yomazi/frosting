@@ -5,7 +5,7 @@ const errorHandler = (error, req, res, next) => {
   const errorCode = error.code || error.name || "InternalServerError";
   const message = error.message || "An unexpected error occurred.";
 
-  if (ConfigService.isLocalEnvironment) {
+  if (ConfigService.environmentId === "local") {
     console.error(error.stack);
     console.log("");
   }

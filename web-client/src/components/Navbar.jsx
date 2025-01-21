@@ -1,3 +1,5 @@
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MenuIcon from "@mui/icons-material/Menu";
 import { getAuth, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import styles from "../styles/navbar.module.scss";
@@ -17,6 +19,8 @@ const Navbar = ({ onLogout }) => {
 
   return (
     <section id={styles.navbar} className="flex justify-between">
+      <AccountCircleIcon />
+      MenuIcon
       <article className="flex items-center">
         <div>
           <img src={cupcakeLogo} className={styles.logo} alt="Frosting logo" />

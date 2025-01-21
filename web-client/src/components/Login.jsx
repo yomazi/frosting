@@ -3,7 +3,7 @@ import { browserLocalPersistence, getAuth, setPersistence, signInWithEmailAndPas
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { login } from "../redux/slices/authSlice";
+import { login } from "../redux/slices/auth-slice";
 import styles from "../styles/auth.module.scss";
 import Spinner from "./Spinner";
 
@@ -37,7 +37,6 @@ const Login = () => {
       setIsLoading(false);
       dispatch(login({ user: userCredential.user }));
     } catch (error) {
-      setIsLoading(false);
       console.error("Login failed:", error);
 
       const errorMessages = {
@@ -50,6 +49,8 @@ const Login = () => {
 
       setErrorMessage(errorMessages[error.code]);
       setShouldShowErrorMessage(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
