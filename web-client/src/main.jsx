@@ -7,11 +7,11 @@ import "./index.css";
 import { login, logout } from "./redux/slices/auth-slice.js";
 import { store } from "./redux/store.js";
 import AuthService from "./services/auth-service.js";
-import { getEnvironmentInfo } from "./services/environment.js";
+import ConfigService from "./services/config-service.js";
 
 const rootElement = document.getElementById("root");
 
-const envInfo = await getEnvironmentInfo();
+const envInfo = await ConfigService.getEnvironmentInfo();
 console.log(`*** ${envInfo.environmentId} environment using ${envInfo.dbId} db ***`);
 initializeApp(envInfo.firebaseConfig);
 
