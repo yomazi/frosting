@@ -42,7 +42,7 @@ h1 {
   font-family: "Rethink Sans", Helvetica, sans-serif;
 }
 
-button {
+.candy-button {
   border-radius: 1.5rem; /* Smooth, candy-like shape */
   padding: 0.6em 1.5rem;
   height: 3rem;
@@ -65,7 +65,7 @@ button {
 /* Curved glossy highlight */
 
 /* Hover effect - brighter and shinier */
-button:hover {
+.candy-button:hover {
   background: linear-gradient(135deg, #9c27b0, #5c0ea0);
   box-shadow:
     inset 0px -3px 8px rgba(255, 255, 255, 0.5),
@@ -74,7 +74,7 @@ button:hover {
 }
 
 /* Active (pressed) effect */
-button:active {
+.candy-button:active {
   transform: scale(0.95);
   box-shadow:
     inset 0px -2px 6px rgba(255, 255, 255, 0.5),

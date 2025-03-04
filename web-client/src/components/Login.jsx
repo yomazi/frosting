@@ -87,7 +87,7 @@ const Login = () => {
               className="p-3 rounded-none focus:outline-none mb-4 w-full xs:max-w-lg sm:rounded-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl"
             />
             <section className="relative flex flex-col justify-center items-center xs:flex-row xs:px-3 mb-4 w-full xs:max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl">
-              <button type="submit" className="w-48 mb-2" disabled={isLoading}>
+              <button type="submit" className="candy-button w-48 mb-2" disabled={isLoading}>
                 Login
               </button>
               <div className="flex relative right-auto mt-6 h-12 px-4 hover:underline sm:absolute sm:mt-0 sm:right-0">

@@ -43,7 +43,7 @@ class AuthService {
     this.#unsubscribeAuthListener = onAuthStateChanged(auth, async (user) => {
       if (user) {
         if (this.#shouldVerifyTokens) {
-          const idToken = await user.getIdToken();
+          const idToken = await user.getIdToken(true);
           const response = await AuthService.verifyToken(idToken);
           const dbUser = response.data.user;
 

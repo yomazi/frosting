@@ -1,15 +1,13 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
 import Main from "./components/Main";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import PerformanceList from "./components/PerformanceList";
 import Register from "./components/Register";
 import ShowReminderHelper from "./components/robin/ShowReminderHelper";
 import Spinner from "./components/Spinner";
-import { logout } from "./redux/slices/auth-slice";
 
 const ProtectedContent = () => {
   const { isLoggedIn, isLoading } = useSelector((state) => state.auth);
@@ -33,17 +31,12 @@ const UnprotectedContent = () => {
 
 function App() {
   const { isLoggedIn, isLoading } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   return (
     <>
       <Router>
-        {isLoggedIn && <Navbar onLogout={handleLogout} />}
-        <div className="main-content">
+        {isLoggedIn && <Navbar />}
+        <div className="flex justify-center">
           <Routes>
             <Route element={<UnprotectedContent />}>
               <Route path="/login" element={<Login />} />

@@ -1,0 +1,8 @@
+{
+  "menuItems": {
+    "robin": [{ "to": "/show-listing", "caption": "Show Listing" }]
+  },
+  "userItems": {
+    "robin": [{ "to": "/show-listing", "caption": "Show Listing" }]
+  }
+}
